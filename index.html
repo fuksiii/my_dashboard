@@ -1,0 +1,2260 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дашборд: Биотехнологии России — рынок, технологии и прогнозы (РБК)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f4f6fb;
+            --white: #ffffff;
+            --ink: #0f172a;
+            --ink-soft: #334155;
+            --muted: #64748b;
+            --line: #e2e8f0;
+            --violet: #7c3aed;
+            --pink: #ec4899;
+            --teal: #0d9488;
+            --blue: #2563eb;
+            --orange: #ea580c;
+            --amber: #f59e0b;
+            --green: #16a34a;
+            --red: #dc2626;
+            --lime: #65a30d;
+            --radius: 20px;
+            --radius-sm: 14px;
+            --shadow-sm: 0 4px 14px rgba(15, 23, 42, 0.06);
+            --shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.28;
+            z-index: 0;
+            pointer-events: none;
+        }
+        body::before {
+            width: 520px; height: 520px;
+            background: radial-gradient(circle, #a78bfa, transparent 70%);
+            top: -160px; right: -120px;
+        }
+        body::after {
+            width: 460px; height: 460px;
+            background: radial-gradient(circle, #2dd4bf, transparent 70%);
+            bottom: -160px; left: -140px;
+        }
+
+        .dashboard {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 28px 24px 90px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ================= HERO ================= */
+        .hero {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            margin-bottom: 44px;
+            box-shadow: var(--shadow-lg);
+            min-height: 360px;
+            display: flex;
+            align-items: flex-end;
+            isolation: isolate;
+        }
+        .hero-bg {
+            position: absolute; inset: 0; z-index: 0;
+            background:
+                radial-gradient(circle at 12% 20%, #059669 0%, transparent 45%),
+                radial-gradient(circle at 88% 22%, #0284c7 0%, transparent 50%),
+                radial-gradient(circle at 65% 92%, #7c3aed 0%, transparent 55%),
+                linear-gradient(135deg, #052e16, #0c4a6e 55%, #2e1065);
+        }
+        .hero-deco {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .hero-fade {
+            position: absolute; inset: 0; z-index: 2;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.65), transparent 65%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            padding: 44px 48px;
+            color: #fff;
+            max-width: 940px;
+        }
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(6px);
+            padding: 7px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 18px;
+        }
+        .hero-eyebrow .dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #4ade80;
+            box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.35);
+        }
+        .hero h1 {
+            font-size: clamp(1.9rem, 4vw, 2.9rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 14px;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+        }
+        .hero p {
+            font-size: 1.05rem;
+            font-weight: 500;
+            opacity: 0.95;
+            max-width: 700px;
+        }
+        .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+        .hero-tag {
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 7px 14px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(6px);
+        }
+
+        /* ================= KPI (FLIP) ================= */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px;
+            margin-bottom: 44px;
+            margin-top: -68px;
+            position: relative;
+            z-index: 3;
+        }
+        .kpi {
+            perspective: 1200px;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+            outline: none;
+        }
+        .kpi:hover { transform: translateY(-5px); }
+        .kpi:focus-visible .kpi-front { box-shadow: 0 0 0 3px #fff, 0 0 0 6px #a78bfa; }
+        .kpi-inner {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .kpi.flipped .kpi-inner { transform: rotateY(180deg); }
+        .kpi-front, .kpi-back {
+            border-radius: var(--radius);
+            color: #fff;
+            box-shadow: var(--shadow);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            position: relative;
+            overflow: hidden;
+        }
+        .kpi-front { padding: 22px 22px 18px; }
+        .kpi-back {
+            position: absolute;
+            inset: 0;
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            line-height: 1.45;
+        }
+        .kpi-front::after {
+            content: '';
+            position: absolute;
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.14);
+            top: -50px; right: -40px;
+        }
+        .kpi.c1 .kpi-front, .kpi.c1 .kpi-back { background: linear-gradient(135deg, #059669, #10b981); }
+        .kpi.c2 .kpi-front, .kpi.c2 .kpi-back { background: linear-gradient(135deg, #0284c7, #38bdf8); }
+        .kpi.c3 .kpi-front, .kpi.c3 .kpi-back { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+        .kpi.c4 .kpi-front, .kpi.c4 .kpi-back { background: linear-gradient(135deg, #ea580c, #f59e0b); }
+        .kpi.c5 .kpi-front, .kpi.c5 .kpi-back { background: linear-gradient(135deg, #db2777, #f472b6); }
+
+        .kpi-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            display: inline-block;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+        }
+        .kpi-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            opacity: 0.9;
+            margin-bottom: 6px;
+        }
+        .kpi-value {
+            font-size: 1.65rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+        }
+        .kpi-delta {
+            font-size: 0.8rem;
+            margin-top: 6px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.22);
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+        .kpi-hint {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.66rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            opacity: 0.7;
+            font-weight: 700;
+        }
+
+        /* ================= SECTION ================= */
+        .section {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 28px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+        }
+        .section-top {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 24px 28px;
+            border-bottom: 1px solid var(--line);
+        }
+        .thumb {
+            width: 76px; height: 76px;
+            border-radius: 16px;
+            flex-shrink: 0;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 3px solid #fff;
+            outline: 2px solid transparent;
+        }
+        .thumb svg { width: 100%; height: 100%; display: block; }
+        .title-wrap { flex: 1; min-width: 0; }
+        .section-num {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+        }
+        .section-top h2 {
+            font-size: 1.24rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            color: var(--ink);
+        }
+        .section-body { padding: 24px 28px 28px; }
+
+        .s1 .section-num, .s1 .fact-btn { background: linear-gradient(135deg, #059669, #10b981); }
+        .s1 .thumb { outline-color: #10b981; }
+        .s2 .section-num, .s2 .fact-btn { background: linear-gradient(135deg, #0284c7, #38bdf8); }
+        .s2 .thumb { outline-color: #38bdf8; }
+        .s3 .section-num, .s3 .fact-btn { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+        .s3 .thumb { outline-color: #a78bfa; }
+        .s4 .section-num, .s4 .fact-btn { background: linear-gradient(135deg, #ea580c, #f59e0b); }
+        .s4 .thumb { outline-color: #f59e0b; }
+        .s5 .section-num, .s5 .fact-btn { background: linear-gradient(135deg, #db2777, #f472b6); }
+        .s5 .thumb { outline-color: #f472b6; }
+        .s6 .section-num, .s6 .fact-btn { background: linear-gradient(135deg, #0891b2, #22d3ee); }
+        .s6 .thumb { outline-color: #22d3ee; }
+        .s7 .section-num, .s7 .fact-btn { background: linear-gradient(135deg, #16a34a, #4ade80); }
+        .s7 .thumb { outline-color: #4ade80; }
+
+        /* ================= FACT BUTTON ================= */
+        .fact-btn {
+            flex-shrink: 0;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 9px 16px;
+            border-radius: 30px;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+            animation: pulseBtn 2.6s ease-in-out infinite;
+        }
+        .fact-btn:hover { transform: translateY(-2px) scale(1.04); }
+        .fact-btn.opened { animation: none; filter: saturate(0.55) brightness(1.05); }
+        @keyframes pulseBtn {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.35), var(--shadow-sm); }
+            50% { box-shadow: 0 0 0 8px rgba(124, 58, 237, 0), var(--shadow-sm); }
+        }
+
+        /* ================= FACT PANEL ================= */
+        .fact-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .fact-panel.open { max-height: 460px; }
+        .fact-inner {
+            margin: 18px 28px 0;
+            padding: 16px 20px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #f5f3ff, #fdf2f8);
+            border-left: 5px solid #7c3aed;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            line-height: 1.65;
+        }
+        .fact-inner .fi-label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 5px;
+        }
+        .s1 .fact-inner { border-left-color: #10b981; background: linear-gradient(135deg, #ecfdf5, #f0fdfa); }
+        .s1 .fact-inner .fi-label { color: #047857; }
+        .s2 .fact-inner { border-left-color: #0284c7; background: linear-gradient(135deg, #f0f9ff, #ecfeff); }
+        .s2 .fact-inner .fi-label { color: #0369a1; }
+        .s3 .fact-inner { border-left-color: #7c3aed; background: linear-gradient(135deg, #f5f3ff, #faf5ff); }
+        .s3 .fact-inner .fi-label { color: #6d28d9; }
+        .s4 .fact-inner { border-left-color: #ea580c; background: linear-gradient(135deg, #fff7ed, #fffbeb); }
+        .s4 .fact-inner .fi-label { color: #c2410c; }
+        .s5 .fact-inner { border-left-color: #db2777; background: linear-gradient(135deg, #fdf2f8, #fff1f2); }
+        .s5 .fact-inner .fi-label { color: #be185d; }
+        .s6 .fact-inner { border-left-color: #0891b2; background: linear-gradient(135deg, #ecfeff, #f0fdfa); }
+        .s6 .fact-inner .fi-label { color: #0e7490; }
+        .s7 .fact-inner { border-left-color: #16a34a; background: linear-gradient(135deg, #f0fdf4, #f7fee7); }
+        .s7 .fact-inner .fi-label { color: #15803d; }
+
+        /* ================= SUBHEAD ================= */
+        .subhead {
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--muted);
+            margin: 22px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .subhead:first-child { margin-top: 0; }
+        .subhead::before {
+            content: '';
+            width: 4px; height: 16px;
+            border-radius: 2px;
+            background: linear-gradient(180deg, #059669, #10b981);
+        }
+        .s2 .subhead::before { background: linear-gradient(180deg, #0284c7, #38bdf8); }
+        .s3 .subhead::before { background: linear-gradient(180deg, #7c3aed, #a78bfa); }
+        .s4 .subhead::before { background: linear-gradient(180deg, #ea580c, #f59e0b); }
+        .s5 .subhead::before { background: linear-gradient(180deg, #db2777, #f472b6); }
+        .s6 .subhead::before { background: linear-gradient(180deg, #0891b2, #22d3ee); }
+        .s7 .subhead::before { background: linear-gradient(180deg, #16a34a, #4ade80); }
+
+        /* ================= METRICS ================= */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+        }
+        .metric {
+            background: linear-gradient(160deg, #fafbff, #f1f4fb);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            padding: 16px 18px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .metric:hover { transform: translateY(-3px); border-color: #cbd5e1; }
+        .metric .m-label { font-size: 0.74rem; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+        .metric .m-value { font-size: 1.2rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; }
+        .metric .m-note { font-size: 0.73rem; color: var(--muted); margin-top: 4px; }
+
+        /* ================= BARS ================= */
+        .bars { display: grid; gap: 14px; }
+        .bar-row .bar-top {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--ink-soft);
+        }
+        .bar-row .bar-top .val { font-weight: 800; }
+        .track { height: 12px; background: #eef2f9; border-radius: 8px; overflow: hidden; }
+        .fill {
+            height: 100%;
+            border-radius: 8px;
+            width: 0;
+            animation: grow 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes grow { to { width: var(--w); } }
+        .fill.emerald { background: linear-gradient(90deg, #059669, #34d399); }
+        .fill.sky { background: linear-gradient(90deg, #0284c7, #38bdf8); }
+        .fill.violet { background: linear-gradient(90deg, #7c3aed, #c026d3); }
+        .fill.orange { background: linear-gradient(90deg, #ea580c, #fb923c); }
+        .fill.pink { background: linear-gradient(90deg, #db2777, #f472b6); }
+        .fill.cyan { background: linear-gradient(90deg, #0891b2, #22d3ee); }
+        .fill.amber { background: linear-gradient(90deg, #d97706, #fbbf24); }
+        .fill.green { background: linear-gradient(90deg, #16a34a, #4ade80); }
+        .fill.red { background: linear-gradient(90deg, #dc2626, #f87171); }
+
+        /* ================= LAYOUT ================= */
+        .split { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+
+        /* ================= CHIPS ================= */
+        .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .chip {
+            font-size: 0.76rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 30px;
+            background: #f1f5f9;
+            color: var(--ink-soft);
+            border: 1px solid var(--line);
+        }
+        .chip strong { font-weight: 800; }
+        .chip.violet { background: #f3e8ff; border-color: #d8b4fe; color: #6b21a8; }
+        .chip.teal { background: #ccfbf1; border-color: #5eead4; color: #115e59; }
+        .chip.orange { background: #ffedd5; border-color: #fdba74; color: #9a3412; }
+        .chip.blue { background: #dbeafe; border-color: #93c5fd; color: #1e40af; }
+        .chip.pink { background: #fce7f3; border-color: #f9a8d4; color: #9d174d; }
+        .chip.green { background: #dcfce7; border-color: #86efac; color: #166534; }
+        .chip.amber { background: #fef3c7; border-color: #fcd34d; color: #92400e; }
+        .chip.cyan { background: #cffafe; border-color: #67e8f9; color: #155e75; }
+
+        /* ================= INSIGHT ================= */
+        .insight {
+            margin-top: 18px;
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            font-size: 0.88rem;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            border-left: 5px solid var(--violet);
+            background: linear-gradient(90deg, #f5f3ff, #faf9ff);
+        }
+        .insight strong { color: var(--violet); font-weight: 800; }
+        .insight.warn { border-left-color: var(--amber); background: linear-gradient(90deg, #fffbeb, #fffdf7); }
+        .insight.warn strong { color: #b45309; }
+        .insight.teal { border-left-color: var(--teal); background: linear-gradient(90deg, #ecfeff, #f7fefe); }
+        .insight.teal strong { color: #0f766e; }
+
+        /* ================= FORECAST ================= */
+        .forecast { display: flex; flex-wrap: wrap; gap: 12px; }
+        .ftag {
+            flex: 1 1 180px;
+            background: linear-gradient(160deg, #fafbff, #f1f4fb);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            border-top: 4px solid var(--emerald, #10b981);
+        }
+        .ftag:nth-child(2) { border-top-color: var(--sky, #38bdf8); }
+        .ftag:nth-child(3) { border-top-color: var(--violet, #a78bfa); }
+        .ftag:nth-child(4) { border-top-color: var(--orange, #f59e0b); }
+        .ftag .ft-year {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+        .ftag .ft-val { font-size: 0.95rem; font-weight: 800; color: var(--ink); }
+
+        /* ================= MATRIX ================= */
+        .matrix {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+        .matrix th, .matrix td { padding: 11px 12px; text-align: left; border-bottom: 1px solid var(--line); }
+        .matrix th {
+            background: #f1f5f9;
+            color: var(--muted);
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .matrix tbody tr:hover { background: #fafbff; }
+        .matrix td.center { text-align: center; }
+        .cell-pos { color: #16a34a; font-weight: 800; }
+        .cell-neg { color: #dc2626; font-weight: 800; }
+        .cell-neu { color: #d97706; font-weight: 800; }
+
+        /* ================= LISTS ================= */
+        .list-col h4 {
+            font-size: 0.82rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .list-col.up h4 { color: #16a34a; }
+        .list-col.down h4 { color: #dc2626; }
+        .list-col ul { list-style: none; font-size: 0.86rem; color: var(--ink-soft); line-height: 2; }
+        .list-col.up li::before { content: '✔ '; color: #16a34a; font-weight: 800; }
+        .list-col.down li::before { content: '▲ '; color: #dc2626; font-weight: 800; font-size: 0.7rem; }
+
+        /* ================= IMG PANEL (SVG) ================= */
+        .img-panel {
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            position: relative;
+            min-height: 200px;
+            box-shadow: var(--shadow-sm);
+        }
+        .img-panel svg {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+        }
+        .img-panel .cap {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            z-index: 2;
+            padding: 16px 18px;
+            color: #fff;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.85), transparent);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* ================= QUIZ ================= */
+        .quiz {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--line);
+            margin-bottom: 28px;
+            overflow: hidden;
+        }
+        .quiz-head {
+            padding: 22px 28px;
+            background: linear-gradient(135deg, #059669, #0d9488 55%, #0284c7);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .quiz-head .qh-icon {
+            width: 54px; height: 54px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.22);
+            display: grid;
+            place-items: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+        .quiz-head h2 { font-size: 1.2rem; font-weight: 800; }
+        .quiz-head p { font-size: 0.82rem; opacity: 0.92; }
+        .quiz-score {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.22);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+        .quiz-body { padding: 24px 28px 28px; display: grid; gap: 22px; }
+        .q-text { font-weight: 800; margin-bottom: 10px; font-size: 0.94rem; }
+        .q-opts { display: grid; gap: 8px; }
+        .q-opt {
+            font-family: inherit;
+            text-align: left;
+            cursor: pointer;
+            background: #f8fafc;
+            border: 1.5px solid var(--line);
+            border-radius: 12px;
+            padding: 11px 16px;
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--ink-soft);
+            transition: all 0.2s ease;
+        }
+        .q-opt:hover:not(:disabled) { border-color: #10b981; background: #ecfdf5; transform: translateX(4px); }
+        .q-opt:disabled { cursor: default; opacity: 0.9; }
+        .q-opt.correct { background: #dcfce7; border-color: #22c55e; color: #166534; }
+        .q-opt.wrong { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+        .q-feedback { font-size: 0.82rem; margin-top: 10px; display: none; line-height: 1.55; }
+        .q-feedback.show { display: block; }
+        .q-feedback.ok { color: #15803d; font-weight: 600; }
+        .q-feedback.no { color: #b91c1c; font-weight: 600; }
+
+        /* ================= CALCULATOR ================= */
+        .calc-section {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--line);
+            margin-bottom: 28px;
+            overflow: hidden;
+        }
+        .calc-head {
+            position: relative;
+            padding: 28px 30px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 12% 10%, rgba(5, 150, 105, 0.9), transparent 50%),
+                radial-gradient(circle at 90% 90%, rgba(2, 132, 199, 0.9), transparent 55%),
+                linear-gradient(135deg, #052e16, #0c4a6e 55%, #2e1065);
+        }
+        .calc-head::after {
+            content: '';
+            position: absolute;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            top: -140px; right: 40px;
+            pointer-events: none;
+        }
+        .calc-head .ch-icon {
+            width: 60px; height: 60px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.16);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            display: grid;
+            place-items: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+        .calc-head .ch-text { position: relative; z-index: 1; flex: 1; min-width: 200px; }
+        .calc-head h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+        }
+        .calc-head p { font-size: 0.85rem; opacity: 0.9; }
+        .calc-presets {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        .preset-btn {
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 9px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(6px);
+        }
+        .preset-btn:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+        .preset-btn.active { background: #fff; color: #052e16; border-color: #fff; }
+
+        .calc-body {
+            padding: 28px 30px 30px;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 26px;
+            align-items: start;
+        }
+
+        .calc-inputs { display: grid; gap: 14px; }
+        .calc-field {
+            background: linear-gradient(160deg, #fafbff, #f1f4fb);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 14px 16px;
+            transition: border-color 0.2s;
+        }
+        .calc-field:focus-within { border-color: #34d399; box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.15); }
+        .calc-field label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--ink-soft);
+            line-height: 1.3;
+        }
+        .calc-field .val-badge {
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: #fff;
+            padding: 3px 11px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .calc-field:nth-child(2) .val-badge { background: linear-gradient(135deg, #0284c7, #38bdf8); }
+        .calc-field:nth-child(3) .val-badge { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+        .calc-field:nth-child(4) .val-badge { background: linear-gradient(135deg, #ea580c, #f59e0b); }
+
+        .calc-field input[type="range"] {
+            width: 100%;
+            height: 6px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #e2e8f0;
+            border-radius: 6px;
+            outline: none;
+            cursor: pointer;
+        }
+        .calc-field input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #059669, #10b981);
+            cursor: pointer;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 8px rgba(5, 150, 105, 0.4);
+            transition: transform 0.15s;
+        }
+        .calc-field input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+        .calc-field input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #059669, #10b981);
+            cursor: pointer;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 8px rgba(5, 150, 105, 0.4);
+        }
+
+        .calc-reset {
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 10px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid var(--line);
+            background: #fff;
+            color: var(--ink-soft);
+            transition: all 0.2s ease;
+            margin-top: 4px;
+        }
+        .calc-reset:hover { border-color: #34d399; color: #047857; background: #ecfdf5; }
+
+        .calc-results { display: grid; gap: 18px; min-width: 0; }
+        .calc-kpis {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .ck {
+            border-radius: 14px;
+            padding: 14px 16px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .ck::after {
+            content: '';
+            position: absolute;
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.14);
+            top: -30px; right: -20px;
+        }
+        .ck .ck-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            opacity: 0.92;
+            margin-bottom: 4px;
+        }
+        .ck .ck-value {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+        }
+        .ck.c1 { background: linear-gradient(135deg, #059669, #10b981); }
+        .ck.c2 { background: linear-gradient(135deg, #0284c7, #38bdf8); }
+        .ck.c3 { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+        .ck.c4 { background: linear-gradient(135deg, #db2777, #f472b6); }
+
+        .calc-chart-wrap {
+            background: linear-gradient(160deg, #fbfcff, #f4f7fd);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 16px 18px 8px;
+        }
+        .chart-title {
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+        .chart-title .ct-unit {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: none;
+            letter-spacing: 0;
+        }
+        .calc-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .calc-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            margin-top: 4px;
+        }
+        .calc-table th {
+            background: #f1f5f9;
+            color: var(--muted);
+            font-weight: 700;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 9px 10px;
+            text-align: right;
+        }
+        .calc-table th:first-child { text-align: left; }
+        .calc-table td {
+            padding: 9px 10px;
+            border-bottom: 1px solid var(--line);
+            text-align: right;
+            font-weight: 600;
+            color: var(--ink-soft);
+        }
+        .calc-table td:first-child {
+            text-align: left;
+            font-weight: 800;
+            color: var(--ink);
+        }
+        .calc-table tbody tr:hover { background: #fafbff; }
+        .calc-table .td-pos { color: #15803d; }
+        .calc-table .td-online { color: #0f766e; font-weight: 800; }
+
+        .calc-note {
+            font-size: 0.74rem;
+            color: var(--muted);
+            margin-top: 4px;
+            line-height: 1.55;
+        }
+
+        /* ================= PROGRESS WIDGET ================= */
+        .progress-widget {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 60;
+            width: 244px;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 15px 17px;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.22);
+            transition: transform 0.3s ease;
+        }
+        .progress-widget:hover { transform: translateY(-3px); }
+        .pw-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 9px;
+        }
+        .pw-title { font-size: 0.78rem; font-weight: 800; color: var(--ink); }
+        .pw-count {
+            font-size: 0.74rem;
+            font-weight: 800;
+            color: #fff;
+            background: linear-gradient(135deg, #059669, #10b981);
+            padding: 2px 10px;
+            border-radius: 20px;
+        }
+        .pw-track { height: 9px; background: #eef2f9; border-radius: 6px; overflow: hidden; }
+        .pw-fill {
+            height: 100%;
+            width: 0;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #059669, #38bdf8);
+            transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s;
+        }
+        .pw-msg { font-size: 0.7rem; color: var(--muted); margin-top: 8px; font-weight: 600; }
+        .progress-widget.done { border-color: #86efac; }
+        .progress-widget.done .pw-fill { background: linear-gradient(90deg, #16a34a, #4ade80); }
+        .progress-widget.done .pw-count { background: linear-gradient(135deg, #16a34a, #4ade80); }
+        .progress-widget.done .pw-msg { color: #15803d; }
+
+        /* ================= TOAST ================= */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translate(-50%, -140%);
+            z-index: 100;
+            background: #0f172a;
+            color: #fff;
+            padding: 13px 22px;
+            border-radius: 30px;
+            font-size: 0.84rem;
+            font-weight: 700;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.35);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s;
+            opacity: 0;
+            max-width: calc(100vw - 32px);
+            text-align: center;
+        }
+        .toast.show { transform: translate(-50%, 0); opacity: 1; }
+
+        /* ================= FOOTER ================= */
+        .footer {
+            text-align: center;
+            margin-top: 44px;
+            padding-top: 26px;
+            border-top: 1px solid var(--line);
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+        .footer .links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 18px;
+            margin-top: 12px;
+        }
+        .footer a { color: var(--violet); font-weight: 600; text-decoration: none; transition: color 0.2s; }
+        .footer a:hover { color: var(--pink); text-decoration: underline; }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 1000px) {
+            .calc-body { grid-template-columns: 1fr; }
+            .calc-kpis { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 820px) {
+            .split { grid-template-columns: 1fr; }
+            .hero-content { padding: 30px 24px; }
+            .section-top { padding: 18px 20px; gap: 12px; }
+            .section-body { padding: 18px 20px 22px; }
+            .fact-inner { margin: 14px 20px 0; }
+            .quiz-head, .quiz-body { padding: 18px 20px; }
+            .dashboard { padding: 16px 14px 110px; }
+            .thumb { width: 58px; height: 58px; border-radius: 13px; }
+            .kpi-grid { margin-top: 0; }
+            .section-top h2 { font-size: 1.05rem; }
+            .fact-btn { font-size: 0.72rem; padding: 8px 13px; }
+            .calc-head, .calc-body { padding: 20px 18px; }
+            .calc-kpis { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .progress-widget {
+                right: 12px; left: 12px; bottom: 12px;
+                width: auto;
+                padding: 12px 14px;
+            }
+            .section-top { flex-wrap: wrap; }
+            .fact-btn { order: 3; margin-left: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+
+        <!-- ============ HERO ============ -->
+        <header class="hero">
+            <div class="hero-bg"></div>
+            <svg class="hero-deco" viewBox="0 0 1200 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <g fill="#ffffff" opacity="0.08">
+                    <circle cx="1080" cy="70" r="95" />
+                    <circle cx="960" cy="280" r="42" />
+                    <circle cx="180" cy="80" r="56" />
+                </g>
+                <!-- ДНК-спираль -->
+                <g stroke="#ffffff" stroke-width="5" fill="none" opacity="0.16" stroke-linecap="round">
+                    <path d="M850 40 C 900 90, 800 130, 850 180 C 900 230, 800 270, 850 320" />
+                    <path d="M890 40 C 840 90, 940 130, 890 180 C 840 230, 940 270, 890 320" />
+                </g>
+                <g stroke="#ffffff" stroke-width="4" opacity="0.12" stroke-linecap="round">
+                    <path d="M865 70 h20 M875 100 h20 M860 130 h20 M875 160 h20 M860 190 h20 M875 220 h20 M860 250 h20 M875 280 h20" />
+                </g>
+                <!-- Микроскоп/клетки -->
+                <g fill="#ffffff" opacity="0.1">
+                    <circle cx="240" cy="240" r="40" />
+                    <circle cx="280" cy="280" r="25" />
+                    <circle cx="200" cy="290" r="18" />
+                </g>
+            </svg>
+            <div class="hero-fade"></div>
+            <div class="hero-content">
+                <span class="hero-eyebrow"><span class="dot"></span> Аналитический дашборд · РБК Тренды</span>
+                <h1>Биотехнологии России:<br>рынок, наука и будущее</h1>
+                <p>Глобальный и российский рынок биотеха, цветовая структура, нацпроект «Биоэкономика», ключевые технологии и компании, инвестиции и прогнозы до 2036 года — по материалам РБК.</p>
+                <div class="hero-tags">
+                    <span class="hero-tag">🧬 2025–2026</span>
+                    <span class="hero-tag">🔮 прогноз до 2036</span>
+                    <span class="hero-tag">📊 Precedence Research · BusinesStat · Минпромторг</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- ============ KPI ============ -->
+        <div class="kpi-grid">
+            <div class="kpi c1" tabindex="0" role="button" aria-label="Глобальный рынок — подробнее">
+                <div class="kpi-inner">
+                    <div class="kpi-front">
+                        <span class="kpi-icon">🌍</span>
+                        <div class="kpi-label">Мировой рынок, 2025</div>
+                        <div class="kpi-value">$1,77 трлн</div>
+                        <div class="kpi-delta">▲ в 4,5 раза к 2019</div>
+                        <span class="kpi-hint">нажмите →</span>
+                    </div>
+                    <div class="kpi-back"><span>Глобальный биотех сопоставим по размеру со всем мировым фармрынком. К 2034 году прогнозируется $5,7 трлн.</span></div>
+                </div>
+            </div>
+            <div class="kpi c2" tabindex="0" role="button" aria-label="Российский рынок — подробнее">
+                <div class="kpi-inner">
+                    <div class="kpi-front">
+                        <span class="kpi-icon">🇷🇺</span>
+                        <div class="kpi-label">Рынок России, 2025</div>
+                        <div class="kpi-value">475 млрд ₽</div>
+                        <div class="kpi-delta">▲ в 2 раза к 2015</div>
+                        <span class="kpi-hint">нажмите →</span>
+                    </div>
+                    <div class="kpi-back"><span>Цель — 700 млрд ₽ к 2030 году и 1 трлн ₽ к 2036-му по нацпроекту «Биоэкономика».</span></div>
+                </div>
+            </div>
+            <div class="kpi c3" tabindex="0" role="button" aria-label="Красный биотех — подробнее">
+                <div class="kpi-inner">
+                    <div class="kpi-front">
+                        <span class="kpi-icon">🩸</span>
+                        <div class="kpi-label">Доля «красного» биотеха</div>
+                        <div class="kpi-value">42%</div>
+                        <div class="kpi-delta">мирового рынка</div>
+                        <span class="kpi-hint">нажмите →</span>
+                    </div>
+                    <div class="kpi-back"><span>Медицина и фармацевтика — крупнейший сегмент. В России на него приходится 58–60% рынка.</span></div>
+                </div>
+            </div>
+            <div class="kpi c4" tabindex="0" role="button" aria-label="Нацпроект — подробнее">
+                <div class="kpi-inner">
+                    <div class="kpi-front">
+                        <span class="kpi-icon">🏛️</span>
+                        <div class="kpi-label">Нацпроект «Биоэкономика»</div>
+                        <div class="kpi-value">с 2026</div>
+                        <div class="kpi-delta">рост производства +96% к 2030</div>
+                        <span class="kpi-hint">нажмите →</span>
+                    </div>
+                    <div class="kpi-back"><span>Цели к 2030: технологическая независимость 40%, доля отечественных биотех-продуктов — 55%.</span></div>
+                </div>
+            </div>
+            <div class="kpi c5" tabindex="0" role="button" aria-label="Импортозамещение — подробнее">
+                <div class="kpi-inner">
+                    <div class="kpi-front">
+                        <span class="kpi-icon">🔄</span>
+                        <div class="kpi-label">Импортозамещение</div>
+                        <div class="kpi-value">40–50%</div>
+                        <div class="kpi-delta">в отдельных сегментах</div>
+                        <span class="kpi-hint">нажмите →</span>
+                    </div>
+                    <div class="kpi-back"><span>Доля отечественной продукции выросла с 15–20% до 40–50% в отдельных сегментах за последние годы.</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ SECTION 1 ============ -->
+        <section class="section s1">
+            <div class="section-top">
+                <div class="thumb" aria-hidden="true">
+                    <svg viewBox="0 0 76 76">
+                        <defs>
+                            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#059669"/><stop offset="1" stop-color="#10b981"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="76" height="76" fill="url(#g1)"/>
+                        <g fill="#fff">
+                            <rect x="15" y="44" width="10" height="18" rx="3"/>
+                            <rect x="30" y="36" width="10" height="26" rx="3"/>
+                            <rect x="45" y="28" width="10" height="34" rx="3"/>
+                            <rect x="60" y="20" width="10" height="42" rx="3" opacity="0.5"/>
+                        </g>
+                        <path d="M18 38 L33 28 L47 22 L63 13" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+                    </svg>
+                </div>
+                <div class="title-wrap">
+                    <span class="section-num">01</span>
+                    <h2>Общая динамика рынка биотехнологий</h2>
+                </div>
+                <button class="fact-btn" data-sec="1" aria-expanded="false" aria-controls="fact-1">
+                    <span>💡</span><span class="fb-text">Факт</span>
+                </button>
+            </div>
+            <div class="fact-panel" id="fact-1">
+                <div class="fact-inner">
+                    <span class="fi-label">Инсайт раздела</span>
+                    Глобальный рынок биотеха за 6 лет вырос в 4,5 раза — с $393 млрд в 2019 до $1,77 трлн в 2025. Россия растёт скромнее по абсолютным цифрам, но удвоила оборот за 10 лет — до 475 млрд ₽.
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="subhead">Глобальный и российский рынок в деньгах</div>
+                <div class="split">
+                    <div class="metric-grid">
+                        <div class="metric">
+                            <div class="m-label">Мировой рынок, 2025</div>
+                            <div class="m-value">$1,77 трлн</div>
+                            <div class="m-note">в 4,5 раза больше, чем в 2019 ($393 млрд)</div>
+                        </div>
+                        <div class="metric">
+                            <div class="m-label">Рынок России, 2025</div>
+                            <div class="m-value">475 млрд ₽</div>
+                            <div class="m-note">в 2 раза к уровню 2015 года</div>
+                        </div>
+                        <div class="metric">
+                            <div class="m-label">Прогноз мира, 2034</div>
+                            <div class="m-value">$5,7 трлн</div>
+                            <div class="m-note">по оценке Precedence Research</div>
+                        </div>
+                        <div class="metric">
+                            <div class="m-label">Прогноз России, 2030</div>
+                            <div class="m-value">> 700 млрд ₽</div>
+                            <div class="m-note">цель нацпроекта «Биоэкономика»</div>
+                        </div>
+                    </div>
+                    <div class="bars">
+                        <div class="bar-row">
+                            <div class="bar-top"><span>Мировой рынок, 2019</span><span class="val">$393 млрд</span></div>
+                            <div class="track"><div class="fill emerald" style="--w:22%"></div></div>
+                        </div>
+                        <div class="bar-row">
+                            <div class="bar-top"><span>Мировой рынок, 2025</span><span class="val">$1 770 млрд</span></div>
+                            <div class="track"><div class="fill emerald" style="--w:100%"></div></div>
+                        </div>
+                        <div class="bar-row">
+                            <div class="bar-top"><span>Россия, 2015</span><span class="val">~238 млрд ₽</span></div>
+                            <div class="track"><div class="fill sky" style="--w:50%"></div></div>
+                        </div>
+                        <div class="bar-row">
+                            <div class="bar-top"><span>Россия, 2025</span><span class="val">475 млрд ₽</span></div>
+                            <div class="track"><div class="fill sky" style="--w:100%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subhead">Региональная структура мирового рынка</div>
+                <div class="metric-grid">
+                    <div class="metric"><div class="m-label">Северная Америка</div><div class="m-value">38%</div><div class="m-note">лидер глобального рынка</div></div>
+                    <div class="metric"><div class="m-label">Азия</div><div class="m-value">29%</div><div class="m-note">обогнала Европу за счёт Китая</div></div>
+                    <div class="metric"><div class="m-label">Европа</div><div class="m-value">24%</div><div class="m-note">третья по доле</div></div>
+                </div>
+
+                <div class="insight">
+                    <strong>Ключевой разрыв:</strong> мировой рынок биотеха уже сопоставим по размеру со всей глобальной фармой. Россия занимает пока скромную долю, но нацпроект «Биоэкономика» ставит амбициозную цель — войти в число заметных игроков к 2036 году.
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION 2 ============ -->
+        <section class="section s2">
+            <div class="section-top">
+                <div class="thumb" aria-hidden="true">
+                    <svg viewBox="0 0 76 76">
+                        <defs>
+                            <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#0284c7"/><stop offset="1" stop-color="#38bdf8"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="76" height="76" fill="url(#g2)"/>
+                        <circle cx="38" cy="38" r="22" fill="#fff" opacity="0.95"/>
+                        <path d="M38 38 L38 16 A22 22 0 0 1 57.05 49 Z" fill="#0369a1" opacity="0.55"/>
+                        <circle cx="38" cy="38" r="7" fill="#0284c7"/>
+                    </svg>
+                </div>
+                <div class="title-wrap">
+                    <span class="section-num">02</span>
+                    <h2>Цветовая структура рынка</h2>
+                </div>
+                <button class="fact-btn" data-sec="2" aria-expanded="false" aria-controls="fact-2">
+                    <span>💡</span><span class="fb-text">Факт</span>
+                </button>
+            </div>
+            <div class="fact-panel" id="fact-2">
+                <div class="fact-inner">
+                    <span class="fi-label">Инсайт раздела</span>
+                    «Красный» биотех (медицина) доминирует и в мире (42%), и в России (58–60%). «Зелёный» (сельское хозяйство) — второй по значимости, а «белый» (промышленность) остаётся наименее развитым сегментом.
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="subhead">Мировая структура по «цветам»</div>
+                <div class="split">
+                    <div class="bars">
+                        <div class="bar-row">
+                            <div class="bar-top"><span>🔴 Красный — здравоохранение и фарма</span><span class="val">42%</span></div>
+                            <div class="track"><div class="fill red" style="--w:42%"></div></div>
+                        </div>
+                        <div class="bar-row">
+                            <div class="bar-top"><span>⚪ Белый — промышленность</span><span class="val">24%</span></div>
+                            <div class="track"><div class="fill cyan" style="--w:24%"></div></div>
+                        </div>
+                        <div class="bar-row">
+                            <div class="bar-top"><span>🟢 Зелёный — сельское хозяйство</span><span class="val">21%</span></div>
+                            <div class="track"><div class="fill green" style="--w:21%"></div></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="img-panel">
+                            <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="p2" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0" stop-color="#0369a1"/><stop offset="1" stop-color="#38bdf8"/>
+                                    </linearGradient>
+                                </defs>
+                                <rect width="600" height="200" fill="url(#p2)"/>
+                                <g fill="#fff" opacity="0.14">
+                                    <circle cx="520" cy="26" r="92"/>
+                                    <circle cx="70" cy="188" r="74"/>
+                                </g>
+                                <g fill="#fff">
+                                    <rect x="120" y="112" width="46" height="62" rx="8" opacity="0.5"/>
+                                    <rect x="180" y="86" width="46" height="88" rx="8" opacity="0.68"/>
+                                    <rect x="240" y="60" width="46" height="114" rx="8" opacity="0.85"/>
+                                    <rect x="300" y="34" width="46" height="140" rx="8"/>
+                                </g>
+                                <path d="M128 104 L188 78 L248 52 L308 26" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7"/>
+                            </svg>
+                            <div class="cap">Красный, белый и зелёный — три ключевых направления биотеха</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subhead">Российская структура рынка</div>
+                <div class="metric-grid">
+                    <div class="metric"><div class="m-label">Медицинские биотехнологии</div><div class="m-value">58–60%</div><div class="m-note">крупнейший сегмент</div></div>
+                    <div class="metric"><div class="m-label">Аграрные биотехнологии</div><div class="m-value">~17%</div><div class="m-note">второй по доле</div></div>
+                    <div class="metric"><div class="m-label">Промышленные биотехнологии</div><div class="m-value">8–10%</div><div class="m-note">наименее развитый сегмент</div></div>
+                </div>
+
+                <div class="insight teal">
+                    <strong>Структурный дисбаланс:</strong> в России «красный» биотех занимает почти 60% рынка — это выше среднемирового уровня. «Белый» биотех (промышленные ферменты, биотопливо, биоматериалы) остаётся самой большой зоной роста и потенциальной точкой прорыва.
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION 3 ============ -->
+        <section class="section s3">
+            <div class="section-top">
+                <div class="thumb" aria-hidden="true">
+                    <svg viewBox="0 0 76 76">
+                        <defs>
+                            <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#7c3aed"/><stop offset="1" stop-color="#a78bfa"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="76" height="76" fill="url(#g3)"/>
+                        <!-- ДНК -->
+                        <g stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round">
+                            <path d="M28 15 C 38 25, 18 35, 28 45 C 38 55, 18 65, 28 75" opacity="0.9"/>
+                            <path d="M48 15 C 38 25, 58 35, 48 45 C 38 55, 58 65, 48 75" opacity="0.9"/>
+                        </g>
+                        <g stroke="#fff" stroke-width="2" opacity="0.6">
+                            <path d="M30 22 h16 M30 38 h16 M30 54 h16 M30 70 h16"/>
+                        </g>
+                    </svg>
+                </div>
+                <div class="title-wrap">
+                    <span class="section-num">03</span>
+                    <h2>Нацпроект «Биоэкономика» и господдержка</h2>
+                </div>
+                <button class="fact-btn" data-sec="3" aria-expanded="false" aria-controls="fact-3">
+                    <span>💡</span><span class="fb-text">Факт</span>
+                </button>
+            </div>
+            <div class="fact-panel" id="fact-3">
+                <div class="fact-inner">
+                    <span class="fi-label">Инсайт раздела</span>
+                    С 2026 года в России стартовал нацпроект «Технологическое обеспечение биоэкономики». Ключевые KPI к 2030 году: рост производства на 96%, технологическая независимость 40%, доля отечественных продуктов — 55%.
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="subhead">Целевые показатели нацпроекта к 2030 году</div>
+                <div class="split">
+                    <div class="metric-grid">
+                        <div class="metric"><div class="m-label">Рост производства продукции биоэкономики</div><div class="m-value">+96%</div><div class="m-note">удвоение объёмов</div></div>
+                        <div class="metric"><div class="m-label">Технологическая независимость</div><div class="m-value">40%</div><div class="m-note">по критическим биотехнологиям</div></div>
+                        <div class="metric"><div class="m-label">Доля отечественных продуктов</div><div class="m-value">55%</div><div class="m-note">в структуре потребления</div></div>
+                        <div class="metric"><div class="m-label">Объём рынка к 2030</div><div class="m-value">> 700 млрд ₽</div><div class="m-note">к 2036 — около 1 трлн ₽</div></div>
+                    </div>
+                    <div class="bars">
+                        <div class="bar-row">
+                            <div class="bar-top"><span>Рост производства</span><span class="val">+96%</span></div>
+                            <div class="track"><div class="fill violet" style="--w:96%"></div></div>
+                        </div>
+                        <div class="bar-row">
+                            <div class="bar-top"><span>Технологическая независимость</span><span class="val">40%</span></div>
+                            <div class="track"><div class="fill sky" style="--w:40%"></div></div>
+                        </div>
+                        <div class="bar-row">
+                            <div class="bar-top"><span>Доля отечественных продуктов</span><span class="val">55%</span></div>
+                            <div class="track"><div class="fill emerald" style="--w:55%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subhead">Механизмы поддержки</div>
+                <div class="chips">
+                    <span class="chip violet"><strong>Нацпроект</strong> «Технологическое обеспечение биоэкономики»</span>
+                    <span class="chip sky" style="background:#e0f2fe;border-color:#7dd3fc;color:#0369a1"><strong>Нацпроект</strong> «Биотехнологии»</span>
+                    <span class="chip green"><strong>Агробиотехнопарки</strong> в регионах</span>
+                    <span class="chip orange"><strong>ОЭЗ</strong> «Зелёная долина» (Татарстан)</span>
+                </div>
+
+                <div class="insight">
+                    <strong>Масштаб задачи:</strong> биоэкономика должна стать фундаментом сразу для нескольких отраслей — химии, пищевой индустрии, энергетики и медицины. Ключевая задача нацпроекта — консолидировать усилия, мощности и ресурсы для создания конкурентных предприятий.
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION 4 ============ -->
+        <section class="section s4">
+            <div class="section-top">
+                <div class="thumb" aria-hidden="true">
+                    <svg viewBox="0 0 76 76">
+                        <defs>
+                            <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#ea580c"/><stop offset="1" stop-color="#f59e0b"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="76" height="76" fill="url(#g4)"/>
+                        <path d="M31 15 v16 L17 54 a8 8 0 0 0 7 12 h28 a8 8 0 0 0 7-12 L45 31 V15"
+                              fill="none" stroke="#fff" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"/>
+                        <path d="M24 48 h28 l6 8 a6 6 0 0 1-5 9 H23 a6 6 0 0 1-5-9 Z" fill="#fff" opacity="0.65"/>
+                        <circle cx="31" cy="54" r="2.6" fill="#ea580c"/>
+                        <circle cx="42" cy="59" r="2.1" fill="#ea580c"/>
+                    </svg>
+                </div>
+                <div class="title-wrap">
+                    <span class="section-num">04</span>
+                    <h2>Технологии и инновации</h2>
+                </div>
+                <button class="fact-btn" data-sec="4" aria-expanded="false" aria-controls="fact-4">
+                    <span>💡</span><span class="fb-text">Факт</span>
+                </button>
+            </div>
+            <div class="fact-panel" id="fact-4">
+                <div class="fact-inner">
+                    <span class="fi-label">Инсайт раздела</span>
+                    CRISPR уже лечит наследственные болезни крови, мРНК-вакцины переходят в онкологию, а ИИ сокращает сроки испытаний вдвое и экономит до $26 млрд в год. Биопринтинг и ксенотрансплантация перестают быть фантастикой.
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="subhead">Ключевые технологические направления</div>
+                <div class="split">
+                    <div class="metric-grid">
+                        <div class="metric"><div class="m-label">CRISPR-Cas9</div><div class="m-value">«Генные ножницы»</div><div class="m-note">Casgevy одобрен FDA для болезней крови</div></div>
+                        <div class="metric"><div class="m-label">мРНК-технологии</div><div class="m-value">вакцины и терапия</div><div class="m-note">BioNTech тестирует персонализированную вакцину от рака лёгких</div></div>
+                        <div class="metric"><div class="m-label">ИИ в биотехе</div><div class="m-value">+20–30% эффективности</div><div class="m-note">сроки испытаний сокращаются вдвое</div></div>
+                        <div class="metric"><div class="m-label">Биопринтинг</div><div class="m-value">ткани и органы</div><div class="m-note">VivoSim (Organovo) печатает печень и кишечник для тестов</div></div>
+                    </div>
+                    <div class="img-panel">
+                        <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="p4" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0" stop-color="#c2410c"/><stop offset="1" stop-color="#f59e0b"/>
+                                </linearGradient>
+                            </defs>
+                            <rect width="600" height="200" fill="url(#p4)"/>
+                            <g fill="#fff" opacity="0.13">
+                                <circle cx="80" cy="30" r="80"/>
+                                <circle cx="540" cy="180" r="86"/>
+                            </g>
+                            <g stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.85">
+                                <path d="M250 50 C 280 70, 220 90, 250 110 C 280 130, 220 150, 250 170"/>
+                                <path d="M300 50 C 270 70, 330 90, 300 110 C 270 130, 330 150, 300 170"/>
+                            </g>
+                            <g stroke="#fff" stroke-width="3" opacity="0.6">
+                                <path d="M258 65 h34 M258 85 h34 M258 105 h34 M258 125 h34 M258 145 h34"/>
+                            </g>
+                            <g fill="#fff" opacity="0.8">
+                                <circle cx="430" cy="70" r="8"/>
+                                <circle cx="470" cy="110" r="5"/>
+                                <circle cx="410" cy="130" r="4"/>
+                                <circle cx="150" cy="80" r="6"/>
+                                <circle cx="120" cy="120" r="4"/>
+                            </g>
+                            <g stroke="#fff" stroke-width="3" opacity="0.55">
+                                <path d="M430 70 L470 110 M430 70 L410 130 M150 80 L120 120"/>
+                            </g>
+                        </svg>
+                        <div class="cap">Генная инженерия, мРНК и искусственный интеллект — драйверы новой биотех-волны</div>
+                    </div>
+                </div>
+
+                <div class="subhead">Перспективные направления на горизонте 5–10 лет</div>
+                <div class="chips">
+                    <span class="chip orange"><strong>Ксенотрансплантация</strong> — пересадка органов животных</span>
+                    <span class="chip violet"><strong>Синтетическая биология</strong> — программирование организмов</span>
+                    <span class="chip teal"><strong>Хранение данных в ДНК</strong> — 215 ПБ в 1 грамме</span>
+                    <span class="chip green"><strong>Биоматериалы</strong> — кожа из мицелия, биопластик</span>
+                </div>
+
+                <div class="insight warn">
+                    <strong>Барьер:</strong> биотех — высокорисковый бизнес. Крупные капиталовложения и длительные сроки разработки сочетаются с низкой вероятностью успеха. Сложная регуляторика и бюрократия замедляют вывод продукции на рынок.
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION 5 ============ -->
+        <section class="section s5">
+            <div class="section-top">
+                <div class="thumb" aria-hidden="true">
+                    <svg viewBox="0 0 76 76">
+                        <defs>
+                            <linearGradient id="g5" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#db2777"/><stop offset="1" stop-color="#f472b6"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="76" height="76" fill="url(#g5)"/>
+                        <circle cx="27" cy="38" r="15" fill="#fff" opacity="0.85"/>
+                        <circle cx="49" cy="38" r="15" fill="#fff" opacity="0.5"/>
+                        <path d="M38 29 v18" stroke="#db2777" stroke-width="3.2" stroke-linecap="round" opacity="0.8"/>
+                        <path d="M33 34 l5 5 5-5" stroke="#db2777" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+                    </svg>
+                </div>
+                <div class="title-wrap">
+                    <span class="section-num">05</span>
+                    <h2>Ключевые игроки и компании</h2>
+                </div>
+                <button class="fact-btn" data-sec="5" aria-expanded="false" aria-controls="fact-5">
+                    <span>💡</span><span class="fb-text">Факт</span>
+                </button>
+            </div>
+            <div class="fact-panel" id="fact-5">
+                <div class="fact-inner">
+                    <span class="fi-label">Инсайт раздела</span>
+                    В России сформировались свои «киты» — BIOCAD и «Артген BioTech». BIOCAD уже поставляет биоаналоги в Африку, Латинскую Америку и Азию, а «Артген» развивает венчурное направление Artgen Seed Fund.
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="subhead">Российские компании</div>
+                <div class="metric-grid">
+                    <div class="metric"><div class="m-label">BIOCAD</div><div class="m-value">55 продуктов</div><div class="m-note">20% — оригинальные разработки; поставки в Африку, Азию, Латинскую Америку</div></div>
+                    <div class="metric"><div class="m-label">«Артген BioTech»</div><div class="m-value">публичная компания</div><div class="m-note">развивает венчурный фонд Artgen Seed Fund</div></div>
+                    <div class="metric"><div class="m-label">«Р-Фарм»</div><div class="m-value">ТОП-2 фармкомпаний РБК</div><div class="m-note">в рейтинге РБК 500</div></div>
+                    <div class="metric"><div class="m-label">«Генериум»</div><div class="m-value">биотех-производство</div><div class="m-note">один из ключевых игроков биофармы</div></div>
+                </div>
+
+                <div class="subhead">Глобальные лидеры (примеры)</div>
+                <div class="chips">
+                    <span class="chip violet"><strong>Novo Nordisk</strong> — семаглутид (Ozempic, Wegovy)</span>
+                    <span class="chip blue"><strong>Amgen</strong> — моноклональные антитела, биосимиляры</span>
+                    <span class="chip teal"><strong>CRISPR Therapeutics</strong> — Casgevy, генная терапия</span>
+                    <span class="chip green"><strong>BioNTech</strong> — мРНК-вакцины от рака</span>
+                    <span class="chip pink"><strong>Ginkgo Bioworks</strong> — синтетическая биология</span>
+                    <span class="chip orange"><strong>MycoWorks</strong> — кожа из мицелия для Hermès</span>
+                </div>
+
+                <div class="insight teal">
+                    <strong>Позиция России:</strong> пока российские компании не входят в число мировых лидеров биотеха — сказывается отставание в объёме инвестиций и ставка на импортозамещение, а не на оригинальные продукты. Но BIOCAD и «Артген» уже признаны крупными региональными игроками.
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION 6 ============ -->
+        <section class="section s6">
+            <div class="section-top">
+                <div class="thumb" aria-hidden="true">
+                    <svg viewBox="0 0 76 76">
+                        <defs>
+                            <linearGradient id="g6" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#0891b2"/><stop offset="1" stop-color="#22d3ee"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="76" height="76" fill="url(#g6)"/>
+                        <path d="M17 22 h7 l7 27 h26 l6-19 H27"
+                              fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="33" cy="59" r="4.2" fill="#fff"/>
+                        <circle cx="52" cy="59" r="4.2" fill="#fff"/>
+                    </svg>
+                </div>
+                <div class="title-wrap">
+                    <span class="section-num">06</span>
+                    <h2>Инвестиции и M&A в биотехе</h2>
+                </div>
+                <button class="fact-btn" data-sec="6" aria-expanded="false" aria-controls="fact-6">
+                    <span>💡</span><span class="fb-text">Факт</span>
+                </button>
+            </div>
+            <div class="fact-panel" id="fact-6">
+                <div class="fact-inner">
+                    <span class="fi-label">Инсайт раздела</span>
+                    Венчурное финансирование биотеха восстанавливается после спада. Крупнейшие раунды 2025 года — Verdiva ($410 млн), Tubulis ($401 млн) и MapLight Therapeutics ($372 млн). В России суммы сделок пока несопоставимы с IT-сектором.
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="subhead">Глобальные венчурные раунды 2025 года</div>
+                <div class="split">
+                    <div class="metric-grid">
+                        <div class="metric"><div class="m-label">Verdiva (Великобритания)</div><div class="m-value">$410 млн</div><div class="m-note">один из крупнейших раундов года</div></div>
+                        <div class="metric"><div class="m-label">Tubulis (Германия)</div><div class="m-value">$401 млн</div><div class="m-note">ADC-терапии; приобретена Gilead за $5 млрд</div></div>
+                        <div class="metric"><div class="m-label">MapLight Therapeutics</div><div class="m-value">$372 млн</div><div class="m-note">нейротерапия</div></div>
+                    </div>
+                    <div class="bars">
+                        <div class="bar-row">
+                            <div class="bar-top"><span>Verdiva</span><span class="val">$410 млн</span></div>
+                            <div class="track"><div class="fill cyan" style="--w:100%"></div></div>
+                        </div>
+                        <div class="bar-row">
+                            <div class="bar-top"><span>Tubulis</span><span class="val">$401 млн</span></div>
+                            <div class="track"><div class="fill sky" style="--w:98%"></div></div>
+                        </div>
+                        <div class="bar-row">
+                            <div class="bar-top"><span>MapLight</span><span class="val">$372 млн</span></div>
+                            <div class="track"><div class="fill teal" style="--w:91%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subhead">Российский контекст</div>
+                <div class="metric-grid">
+                    <div class="metric"><div class="m-label">Artgen Seed Fund</div><div class="m-value">венчурный фонд</div><div class="m-note">инвестиции в стартапы здравоохранения</div></div>
+                    <div class="metric"><div class="m-label">«Био-фонд РВК»</div><div class="m-value">государственный</div><div class="m-note">поддержка биотех-проектов</div></div>
+                    <div class="metric"><div class="m-label">IPO «Развитие Биотехнологий»</div><div class="m-value">план 2025–2026</div><div class="m-note">дочерняя компания ИСКЧ</div></div>
+                </div>
+
+                <div class="insight">
+                    <strong>Тренд:</strong> после бума ИИ инвесторы могут обратить больше внимания на биотех и точное земледелие — об этом говорят в ВТБ. Однако в России венчурный капитал пока идёт в биотех неохотно: суммы сделок несопоставимы с IT-сектором.
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION 7 ============ -->
+        <section class="section s7">
+            <div class="section-top">
+                <div class="thumb" aria-hidden="true">
+                    <svg viewBox="0 0 76 76">
+                        <defs>
+                            <linearGradient id="g7" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#16a34a"/><stop offset="1" stop-color="#4ade80"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="76" height="76" fill="url(#g7)"/>
+                        <circle cx="38" cy="38" r="21" fill="none" stroke="#fff" stroke-width="3.2" opacity="0.6"/>
+                        <circle cx="38" cy="38" r="13" fill="none" stroke="#fff" stroke-width="3.2" opacity="0.85"/>
+                        <circle cx="38" cy="38" r="5.4" fill="#fff"/>
+                    </svg>
+                </div>
+                <div class="title-wrap">
+                    <span class="section-num">07</span>
+                    <h2>Прогнозы до 2036 года и выводы</h2>
+                </div>
+                <button class="fact-btn" data-sec="7" aria-expanded="false" aria-controls="fact-7">
+                    <span>💡</span><span class="fb-text">Факт</span>
+                </button>
+            </div>
+            <div class="fact-panel" id="fact-7">
+                <div class="fact-inner">
+                    <span class="fi-label">Инсайт раздела</span>
+                    Базовый сценарий: рынок России превысит 700 млрд ₽ к 2030 и 1 трлн ₽ к 2036. Главный риск — не спрос, а кадры, инвестиции и зависимость от импортного оборудования и реагентов.
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="subhead">Сценарии развития российского рынка</div>
+                <div class="forecast">
+                    <div class="ftag">
+                        <div class="ft-year">2030 (базовый)</div>
+                        <div class="ft-val">> 700 млрд ₽</div>
+                    </div>
+                    <div class="ftag">
+                        <div class="ft-year">2036 (целевой)</div>
+                        <div class="ft-val">~1 трлн ₽</div>
+                    </div>
+                    <div class="ftag">
+                        <div class="ft-year">Мировой рынок 2034</div>
+                        <div class="ft-val">$5,7 трлн</div>
+                    </div>
+                    <div class="ftag">
+                        <div class="ft-year">Технологическая независимость 2030</div>
+                        <div class="ft-val">40%</div>
+                    </div>
+                </div>
+
+                <div class="subhead">Сводная матрица драйверов и барьеров</div>
+                <div style="overflow-x:auto;">
+                    <table class="matrix">
+                        <thead>
+                            <tr>
+                                <th>Фактор</th>
+                                <th>Тип</th>
+                                <th class="center">Базовый</th>
+                                <th class="center">Оптимистичный</th>
+                                <th class="center">Пессимистичный</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Нацпроект «Биоэкономика»</td>
+                                <td>Драйвер</td>
+                                <td class="center cell-pos">+</td>
+                                <td class="center cell-pos">++</td>
+                                <td class="center cell-pos">+</td>
+                            </tr>
+                            <tr>
+                                <td>Импортозамещение</td>
+                                <td>Драйвер</td>
+                                <td class="center cell-pos">+</td>
+                                <td class="center cell-pos">++</td>
+                                <td class="center cell-neu">0</td>
+                            </tr>
+                            <tr>
+                                <td>Технологии (CRISPR, мРНК, ИИ)</td>
+                                <td>Драйвер</td>
+                                <td class="center cell-pos">+</td>
+                                <td class="center cell-pos">++</td>
+                                <td class="center cell-neu">0</td>
+                            </tr>
+                            <tr>
+                                <td>Дефицит инвестиций и кадров</td>
+                                <td>Барьер</td>
+                                <td class="center cell-neg">−</td>
+                                <td class="center cell-neu">0</td>
+                                <td class="center cell-neg">−−</td>
+                            </tr>
+                            <tr>
+                                <td>Зависимость от импортного оборудования</td>
+                                <td>Барьер</td>
+                                <td class="center cell-neg">−</td>
+                                <td class="center cell-neu">0</td>
+                                <td class="center cell-neg">−−</td>
+                            </tr>
+                            <tr>
+                                <td>Регуляторные барьеры</td>
+                                <td>Барьер</td>
+                                <td class="center cell-neg">−</td>
+                                <td class="center cell-neg">−</td>
+                                <td class="center cell-neg">−−</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="font-size:0.74rem;color:var(--muted);margin-top:8px;">
+                    ++ сильное положительное влияние · + положительное · 0 нейтральное · − отрицательное · −− сильное отрицательное
+                </p>
+
+                <div class="insight">
+                    <strong>Общий вывод:</strong> биотехнологии — одна из самых динамичных и инвестиционно привлекательных отраслей мира. У России есть сильные научные компетенции и природные ресурсы, но для выхода в мировые лидеры нужны масштабные инвестиции, подготовка кадров и снижение регуляторных барьеров.
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ QUIZ ============ -->
+        <section class="quiz">
+            <div class="quiz-head">
+                <div class="qh-icon">🧬</div>
+                <div>
+                    <h2>Проверьте себя</h2>
+                    <p>Три вопроса по данным дашборда — выберите один вариант ответа</p>
+                </div>
+                <div class="quiz-score">Счёт: <span id="quizScore">0 / 3</span></div>
+            </div>
+            <div class="quiz-body">
+                <div class="quiz-q">
+                    <p class="q-text">1. Какой сегмент биотеха доминирует в России?</p>
+                    <div class="q-opts">
+                        <button class="q-opt" data-correct="0">Промышленный («белый»)</button>
+                        <button class="q-opt" data-correct="1">Медицинский («красный»)</button>
+                        <button class="q-opt" data-correct="0">Сельскохозяйственный («зелёный»)</button>
+                    </div>
+                    <div class="q-feedback"
+                         data-ok="Медицинские биотехнологии занимают 58–60% российского рынка."
+                         data-no="Доминирует «красный» биотех — 58–60% рынка России."></div>
+                </div>
+                <div class="quiz-q">
+                    <p class="q-text">2. Какой целевой объём рынка биотеха заложен в нацпроекте к 2030 году?</p>
+                    <div class="q-opts">
+                        <button class="q-opt" data-correct="0">475 млрд ₽</button>
+                        <button class="q-opt" data-correct="0">1 трлн ₽</button>
+                        <button class="q-opt" data-correct="1">Более 700 млрд ₽</button>
+                    </div>
+                    <div class="q-feedback"
+                         data-ok="Цель — превысить 700 млрд ₽ к 2030 году и выйти на ~1 трлн ₽ к 2036-му."
+                         data-no="К 2030 году цель — более 700 млрд ₽; 1 трлн ₽ — горизонт 2036 года."></div>
+                </div>
+                <div class="quiz-q">
+                    <p class="q-text">3. Какая технология первой получила одобрение FDA для CRISPR-терапии?</p>
+                    <div class="q-opts">
+                        <button class="q-opt" data-correct="1">Casgevy</button>
+                        <button class="q-opt" data-correct="0">Ozempic</button>
+                        <button class="q-opt" data-correct="0">MariTide</button>
+                    </div>
+                    <div class="q-feedback"
+                         data-ok="Casgevy от CRISPR Therapeutics — первая одобренная CRISPR-терапия для болезней крови."
+                         data-no="Первая CRISPR-терапия, одобренная FDA, — Casgevy."></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ CALCULATOR ============ -->
+        <section class="calc-section">
+            <div class="calc-head">
+                <div class="ch-icon">🧮</div>
+                <div class="ch-text">
+                    <h2>Калькулятор прогноза рынка биотеха</h2>
+                    <p>Меняйте параметры — KPI, графики и таблица пересчитываются мгновенно</p>
+                </div>
+                <div class="calc-presets">
+                    <button class="preset-btn" data-preset="pess">Пессимистичный</button>
+                    <button class="preset-btn active" data-preset="base">Базовый</button>
+                    <button class="preset-btn" data-preset="opt">Оптимистичный</button>
+                </div>
+            </div>
+            <div class="calc-body">
+                <div class="calc-inputs">
+                    <div class="calc-field">
+                        <label>Объём рынка 2025 <span class="val-badge" id="badgeBase">475 млрд ₽</span></label>
+                        <input type="range" id="inputBase" min="350" max="600" step="5" value="475"
+                               aria-label="Объём рынка 2025, млрд ₽">
+                    </div>
+                    <div class="calc-field">
+                        <label>Среднегодовой рост рынка <span class="val-badge" id="badgeCagr">8,0%</span></label>
+                        <input type="range" id="inputCagr" min="2" max="16" step="0.5" value="8"
+                               aria-label="Среднегодовой рост рынка, %">
+                    </div>
+                    <div class="calc-field">
+                        <label>Доля «красного» биотеха <span class="val-badge" id="badgeRed">59%</span></label>
+                        <input type="range" id="inputRed" min="40" max="75" step="1" value="59"
+                               aria-label="Доля красного биотеха, %">
+                    </div>
+                    <div class="calc-field">
+                        <label>Прирост доли «красного» <span class="val-badge" id="badgeRedDelta">+0,5 п.п.</span></label>
+                        <input type="range" id="inputRedDelta" min="-2" max="3" step="0.5" value="0.5"
+                               aria-label="Ежегодный прирост доли красного биотеха, п.п.">
+                    </div>
+                    <button class="calc-reset" id="calcReset">↺ Сбросить к базовому</button>
+                </div>
+
+                <div class="calc-results">
+                    <div class="calc-kpis">
+                        <div class="ck c1">
+                            <div class="ck-label">Рынок 2030</div>
+                            <div class="ck-value" id="kpiMarket2030">—</div>
+                        </div>
+                        <div class="ck c2">
+                            <div class="ck-label">Рост 2025 → 2030</div>
+                            <div class="ck-value" id="kpiGrowth">—</div>
+                        </div>
+                        <div class="ck c3">
+                            <div class="ck-label">«Красный» биотех 2030</div>
+                            <div class="ck-value" id="kpiRed2030">—</div>
+                        </div>
+                        <div class="ck c4">
+                            <div class="ck-label">Доля «красного» 2030</div>
+                            <div class="ck-value" id="kpiRedShare">—</div>
+                        </div>
+                    </div>
+
+                    <div class="calc-chart-wrap">
+                        <div class="chart-title">
+                            <span>Объём рынка 2025–2030</span>
+                            <span class="ct-unit">млрд ₽</span>
+                        </div>
+                        <svg class="calc-svg" id="chartMarket" viewBox="0 0 800 340"
+                             role="img" aria-label="Линейный график объёма рынка"></svg>
+                    </div>
+
+                    <div class="calc-chart-wrap">
+                        <div class="chart-title">
+                            <span>Структура рынка: «красный» vs остальные</span>
+                            <span class="ct-unit">млрд ₽</span>
+                        </div>
+                        <svg class="calc-svg" id="chartSplit" viewBox="0 0 800 340"
+                             role="img" aria-label="Столбчатая диаграмма структуры рынка"></svg>
+                    </div>
+
+                    <div>
+                        <table class="calc-table" aria-label="Годовая таблица прогноза">
+                            <thead>
+                                <tr>
+                                    <th>Год</th>
+                                    <th>Рынок, млрд ₽</th>
+                                    <th>«Красный», млрд ₽</th>
+                                    <th>Доля «красного»</th>
+                                </tr>
+                            </thead>
+                            <tbody id="calcTableBody"></tbody>
+                        </table>
+                        <p class="calc-note">
+                            Модель: сложный процент от базы 2025 г. Доля «красного» биотеха линейно меняется на заданный шаг в п.п.
+                            каждый год. Прогноз носит иллюстративный характер и не является инвестиционной рекомендацией.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ FOOTER ============ -->
+        <footer class="footer">
+            <p>Дашборд составлен на основе материалов РБК Тренды, РБК Отрасли, РБК Исследования рынков, данных Precedence Research, BusinesStat, Минпромторга.</p>
+            <div class="links">
+                <a href="https://trends.rbc.ru/trends/innovation/69392ae69a79474a8e21f22e" target="_blank" rel="noopener">Весь цвет биотеха — РБК Тренды</a>
+                <a href="https://marketing.rbc.ru/landings/it/?page=4" target="_blank" rel="noopener">Российский рынок биотехнологий — РБК Исследования</a>
+                <a href="https://rt.rbc.ru/tatarstan/10/04/2026/69d8d2e79a7947c15f387555" target="_blank" rel="noopener">Рынок биотеха и нацпроекты — РБК Татарстан</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ============ PROGRESS WIDGET ============ -->
+    <div class="progress-widget" id="progressWidget">
+        <div class="pw-head">
+            <span class="pw-title">🧬 Исследование</span>
+            <span class="pw-count"><span id="pwNum">0</span>/7</span>
+        </div>
+        <div class="pw-track"><div class="pw-fill" id="pwFill"></div></div>
+        <div class="pw-msg" id="pwMsg">Открывайте факты разделов</div>
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+
+            /* ============ TOAST ============ */
+            function toast(msg) {
+                var t = document.createElement('div');
+                t.className = 'toast';
+                t.textContent = msg;
+                document.body.appendChild(t);
+                requestAnimationFrame(function () { t.classList.add('show'); });
+                setTimeout(function () {
+                    t.classList.remove('show');
+                    setTimeout(function () { t.remove(); }, 450);
+                }, 2600);
+            }
+
+            /* ============ PROGRESS WIDGET ============ */
+            var TOTAL = 7;
+            var explored = new Set();
+
+            function updateProgress() {
+                var n = explored.size;
+                document.getElementById('pwNum').textContent = n;
+                document.getElementById('pwFill').style.width = (n / TOTAL * 100) + '%';
+                var widget = document.getElementById('progressWidget');
+                var msg = document.getElementById('pwMsg');
+                if (n === TOTAL) {
+                    widget.classList.add('done');
+                    msg.textContent = '🏆 Все инсайты собраны!';
+                    toast('🏆 Достижение: открыты все 7 инсайтов дашборда!');
+                } else {
+                    widget.classList.remove('done');
+                    msg.textContent = 'Осталось разделов: ' + (TOTAL - n);
+                }
+            }
+
+            /* ============ FACT BUTTONS ============ */
+            document.querySelectorAll('.fact-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var id = btn.dataset.sec;
+                    var panel = document.getElementById('fact-' + id);
+                    var isOpen = panel.classList.toggle('open');
+                    btn.classList.toggle('opened', isOpen);
+                    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                    btn.querySelector('.fb-text').textContent = isOpen ? 'Скрыть' : 'Факт';
+                    if (isOpen && !explored.has(id)) {
+                        explored.add(id);
+                        updateProgress();
+                        toast('💡 Открыт инсайт раздела ' + id + ' из 7');
+                    }
+                });
+            });
+
+            /* ============ KPI FLIP ============ */
+            document.querySelectorAll('.kpi').forEach(function (card) {
+                var flip = function () { card.classList.toggle('flipped'); };
+                card.addEventListener('click', flip);
+                card.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        flip();
+                    }
+                });
+            });
+
+            /* ============ QUIZ ============ */
+            var score = 0;
+            var answered = 0;
+            var scoreEl = document.getElementById('quizScore');
+
+            document.querySelectorAll('.q-opt').forEach(function (opt) {
+                opt.addEventListener('click', function () {
+                    var q = opt.closest('.quiz-q');
+                    if (q.dataset.done) return;
+                    q.dataset.done = '1';
+                    var isCorrect = opt.dataset.correct === '1';
+
+                    q.querySelectorAll('.q-opt').forEach(function (o) {
+                        o.disabled = true;
+                        if (o.dataset.correct === '1') o.classList.add('correct');
+                    });
+                    if (!isCorrect) opt.classList.add('wrong');
+
+                    var fb = q.querySelector('.q-feedback');
+                    fb.textContent = isCorrect ? '✅ ' + fb.dataset.ok : '❌ ' + fb.dataset.no;
+                    fb.classList.add('show', isCorrect ? 'ok' : 'no');
+
+                    if (isCorrect) score++;
+                    answered++;
+                    scoreEl.textContent = score + ' / 3';
+
+                    if (answered === 3) {
+                        setTimeout(function () {
+                            toast(score === 3
+                                ? '🥇 Идеально: 3 из 3! Вы отлично знаете биотех'
+                                : '🎓 Квиз пройден: ' + score + ' из 3');
+                        }, 600);
+                    }
+                });
+            });
+
+            updateProgress();
+
+            /* ================================================================
+               CALCULATOR
+               ================================================================ */
+            var $ = function (id) { return document.getElementById(id); };
+
+            var inputs = {
+                base: $('inputBase'),
+                cagr: $('inputCagr'),
+                red: $('inputRed'),
+                redDelta: $('inputRedDelta')
+            };
+
+            var badges = {
+                base: $('badgeBase'),
+                cagr: $('badgeCagr'),
+                red: $('badgeRed'),
+                redDelta: $('badgeRedDelta')
+            };
+
+            var YEARS = [2025, 2026, 2027, 2028, 2029, 2030];
+
+            var PRESETS = {
+                base: { base: 475, cagr: 8, red: 59, redDelta: 0.5 },
+                opt:  { base: 475, cagr: 11, red: 59, redDelta: 1 },
+                pess: { base: 450, cagr: 4, red: 59, redDelta: -0.5 }
+            };
+
+            function fmt(n, d) {
+                return n.toFixed(d).replace('.', ',');
+            }
+
+            /* ---------- SVG LINE CHART ---------- */
+            function renderLineChart(svg, values) {
+                var W = 800, H = 340;
+                var m = { t: 30, r: 30, b: 50, l: 74 };
+                var iw = W - m.l - m.r;
+                var ih = H - m.t - m.b;
+
+                var maxV = Math.max.apply(null, values);
+                var yMax = Math.ceil(maxV * 1.15 / 50) * 50;
+                if (yMax <= 0) yMax = 1;
+
+                var xs = values.map(function (_, i) {
+                    return m.l + (i / (values.length - 1)) * iw;
+                });
+                var ys = values.map(function (v) {
+                    return m.t + ih - (v / yMax) * ih;
+                });
+
+                var grid = '';
+                for (var i = 0; i <= 4; i++) {
+                    var y = m.t + (ih / 4) * i;
+                    var val = yMax - (yMax / 4) * i;
+                    grid += '<line x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + y + '" y2="' + y +
+                            '" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="' + (i === 4 ? '0' : '3 4') + '"/>';
+                    grid += '<text x="' + (m.l - 10) + '" y="' + (y + 4) +
+                            '" text-anchor="end" font-size="11" fill="#64748b" font-family="Manrope,sans-serif">' +
+                            Math.round(val) + '</text>';
+                }
+
+                var areaPath = 'M ' + xs[0] + ' ' + (m.t + ih);
+                for (var a = 0; a < xs.length; a++) {
+                    areaPath += ' L ' + xs[a] + ' ' + ys[a];
+                }
+                areaPath += ' L ' + xs[xs.length - 1] + ' ' + (m.t + ih) + ' Z';
+
+                var linePath = 'M ' + xs[0] + ' ' + ys[0];
+                for (var b = 1; b < xs.length; b++) {
+                    linePath += ' L ' + xs[b] + ' ' + ys[b];
+                }
+
+                var points = '';
+                for (var p = 0; p < xs.length; p++) {
+                    points += '<circle cx="' + xs[p] + '" cy="' + ys[p] +
+                              '" r="6" fill="#fff" stroke="#059669" stroke-width="3"/>';
+                    points += '<text x="' + xs[p] + '" y="' + (ys[p] - 14) +
+                              '" text-anchor="middle" font-size="11" font-weight="800" fill="#064e3b" font-family="Manrope,sans-serif">' +
+                              Math.round(values[p]) + '</text>';
+                }
+
+                var xLabels = '';
+                for (var x = 0; x < YEARS.length; x++) {
+                    xLabels += '<text x="' + xs[x] + '" y="' + (m.t + ih + 22) +
+                               '" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b" font-family="Manrope,sans-serif">' +
+                               YEARS[x] + '</text>';
+                }
+
+                svg.innerHTML =
+                    '<defs>' +
+                        '<linearGradient id="lineAreaGrad" x1="0" y1="0" x2="0" y2="1">' +
+                            '<stop offset="0" stop-color="#059669" stop-opacity="0.35"/>' +
+                            '<stop offset="1" stop-color="#059669" stop-opacity="0"/>' +
+                        '</linearGradient>' +
+                        '<linearGradient id="lineStrokeGrad" x1="0" y1="0" x2="1" y2="0">' +
+                            '<stop offset="0" stop-color="#059669"/>' +
+                            '<stop offset="1" stop-color="#38bdf8"/>' +
+                        '</linearGradient>' +
+                    '</defs>' +
+                    grid +
+                    '<path d="' + areaPath + '" fill="url(#lineAreaGrad)"/>' +
+                    '<path d="' + linePath + '" fill="none" stroke="url(#lineStrokeGrad)" stroke-width="4" ' +
+                          'stroke-linecap="round" stroke-linejoin="round"/>' +
+                    points + xLabels;
+            }
+
+            /* ---------- SVG STACKED BARS ---------- */
+            function renderStackedBars(svg, red, rest) {
+                var W = 800, H = 340;
+                var m = { t: 30, r: 30, b: 50, l: 74 };
+                var iw = W - m.l - m.r;
+                var ih = H - m.t - m.b;
+
+                var totals = red.map(function (o, i) { return o + rest[i]; });
+                var yMax = Math.ceil(Math.max.apply(null, totals) * 1.15 / 50) * 50;
+                if (yMax <= 0) yMax = 1;
+
+                var n = YEARS.length;
+                var slot = iw / n;
+                var barW = slot * 0.55;
+                var gap = slot - barW;
+
+                var grid = '';
+                for (var i = 0; i <= 4; i++) {
+                    var y = m.t + (ih / 4) * i;
+                    var val = yMax - (yMax / 4) * i;
+                    grid += '<line x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + y + '" y2="' + y +
+                            '" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="' + (i === 4 ? '0' : '3 4') + '"/>';
+                    grid += '<text x="' + (m.l - 10) + '" y="' + (y + 4) +
+                            '" text-anchor="end" font-size="11" fill="#64748b" font-family="Manrope,sans-serif">' +
+                            Math.round(val) + '</text>';
+                }
+
+                var bars = '';
+                for (var b = 0; b < n; b++) {
+                    var x = m.l + gap / 2 + b * slot;
+                    var totalH = (totals[b] / yMax) * ih;
+                    var redH = (red[b] / yMax) * ih;
+                    var restH = (rest[b] / yMax) * ih;
+                    var yTop = m.t + ih - totalH;
+                    var yRedBottom = yTop + redH;
+
+                    bars += '<rect x="' + x + '" y="' + yTop + '" width="' + barW + '" height="' + redH +
+                            '" rx="6" fill="#db2777"><title>«Красный»: ' + Math.round(red[b]) + ' млрд ₽</title></rect>';
+                    bars += '<rect x="' + x + '" y="' + yRedBottom + '" width="' + barW + '" height="' + restH +
+                            '" rx="6" fill="#0891b2"><title>Остальные: ' + Math.round(rest[b]) + ' млрд ₽</title></rect>';
+
+                    bars += '<text x="' + (x + barW / 2) + '" y="' + (yTop - 8) +
+                            '" text-anchor="middle" font-size="11" font-weight="800" fill="#1e1b4b" font-family="Manrope,sans-serif">' +
+                            Math.round(totals[b]) + '</text>';
+                    bars += '<text x="' + (x + barW / 2) + '" y="' + (m.t + ih + 22) +
+                            '" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b" font-family="Manrope,sans-serif">' +
+                            YEARS[b] + '</text>';
+                }
+
+                var legend = 
+                    '<g transform="translate(' + (W - m.r - 210) + ',' + (m.t + 6) + ')">' +
+                        '<rect x="0" y="-10" width="14" height="14" rx="4" fill="#db2777"/>' +
+                        '<text x="20" y="1" font-size="12" font-weight="700" fill="#334155" font-family="Manrope,sans-serif">«Красный»</text>' +
+                        '<rect x="110" y="-10" width="14" height="14" rx="4" fill="#0891b2"/>' +
+                        '<text x="130" y="1" font-size="12" font-weight="700" fill="#334155" font-family="Manrope,sans-serif">Остальные</text>' +
+                    '</g>';
+
+                svg.innerHTML = grid + bars + legend;
+            }
+
+            /* ---------- MAIN RECALC ---------- */
+            function recalc() {
+                var base = parseFloat(inputs.base.value);
+                var cagr = parseFloat(inputs.cagr.value);
+                var redStart = parseFloat(inputs.red.value);
+                var redDelta = parseFloat(inputs.redDelta.value);
+
+                badges.base.textContent = fmt(base, 0) + ' млрд ₽';
+                badges.cagr.textContent = fmt(cagr, 1) + '%';
+                badges.red.textContent = fmt(redStart, 0) + '%';
+                badges.redDelta.textContent = (redDelta >= 0 ? '+' : '') + fmt(redDelta, 1) + ' п.п.';
+
+                var market = [];
+                var redShare = [];
+                var redVol = [];
+                var restVol = [];
+
+                var m = base;
+                var s = redStart;
+                for (var i = 0; i < YEARS.length; i++) {
+                    market.push(m);
+                    var share = Math.min(Math.max(s, 0), 90);
+                    redShare.push(share);
+                    redVol.push(m * share / 100);
+                    restVol.push(m * (1 - share / 100));
+                    m = m * (1 + cagr / 100);
+                    s = s + redDelta;
+                }
+
+                /* KPIs */
+                $('kpiMarket2030').textContent = Math.round(market[5]) + ' млрд ₽';
+                var growth = (market[5] / market[0] - 1) * 100;
+                $('kpiGrowth').textContent = '+' + Math.round(growth) + '%';
+                $('kpiRed2030').textContent = Math.round(redVol[5]) + ' млрд ₽';
+                $('kpiRedShare').textContent = fmt(redShare[5], 0) + '%';
+
+                /* Charts */
+                renderLineChart($('chartMarket'), market);
+                renderStackedBars($('chartSplit'), redVol, restVol);
+
+                /* Table */
+                var tbody = $('calcTableBody');
+                var rows = '';
+                for (var r = 0; r < YEARS.length; r++) {
+                    rows += '<tr>' +
+                        '<td>' + YEARS[r] + '</td>' +
+                        '<td>' + Math.round(market[r]) + '</td>' +
+                        '<td class="td-online">' + Math.round(redVol[r]) + '</td>' +
+                        '<td>' + fmt(redShare[r], 0) + '%</td>' +
+                    '</tr>';
+                }
+                tbody.innerHTML = rows;
+            }
+
+            /* ---------- EVENTS ---------- */
+            Object.keys(inputs).forEach(function (k) {
+                inputs[k].addEventListener('input', function () {
+                    document.querySelectorAll('.preset-btn').forEach(function (b) {
+                        b.classList.remove('active');
+                    });
+                    recalc();
+                });
+            });
+
+            document.querySelectorAll('.preset-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var p = PRESETS[btn.dataset.preset];
+                    if (!p) return;
+                    inputs.base.value = p.base;
+                    inputs.cagr.value = p.cagr;
+                    inputs.red.value = p.red;
+                    inputs.redDelta.value = p.redDelta;
+                    document.querySelectorAll('.preset-btn').forEach(function (b) {
+                        b.classList.remove('active');
+                    });
+                    btn.classList.add('active');
+                    recalc();
+                });
+            });
+
+            $('calcReset').addEventListener('click', function () {
+                var p = PRESETS.base;
+                inputs.base.value = p.base;
+                inputs.cagr.value = p.cagr;
+                inputs.red.value = p.red;
+                inputs.redDelta.value = p.redDelta;
+                document.querySelectorAll('.preset-btn').forEach(function (b) {
+                    b.classList.toggle('active', b.dataset.preset === 'base');
+                });
+                recalc();
+            });
+
+            /* ---------- INIT ---------- */
+            recalc();
+        })();
+    </script>
+</body>
+</html>
